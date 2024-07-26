@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница клиента</title>
+    <link rel="stylesheet" href="{% static 'style7.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Страница клиента</h1>
+    <h2>Ваши запросы</h2>
+    <ul>
+        {% for request in requests %}
+            <li>
+                {{ request.description }} - {{ request.master.name }} > {{ request.status }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a class="buttonn" href="{% url 'create_request' %}">Создать новый запрос</a>
+    <a href="{% url 'logout' %}">Выйти</a>
+</div>
+    <div class="btn">
+        <a class="button" href="{% url 'home' %}">Назад</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+    <link rel="stylesheet" href="{% static 'style13.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Список новостей</h1>
+    <a class="button" href="{% url 'news_create' %}">Добавить новые новости</a>
+    <a class="button" href="{% url 'home' %}">Назад</a>
+    <ul>
+        {% for news in news %}
+            <li>
+                <h2>{{ news.title }}</h2>
+                <p>{{ news.content }}</p>
+                <p><em>{{ news.created_at }}</em></p>
+                <a class="button" href="{% url 'news_update' news.pk %}">Редактировать</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

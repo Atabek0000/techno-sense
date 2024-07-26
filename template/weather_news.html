@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Погодное приложение</title>
+    <style>
+        body {
+            background-color: #474b5b;
+        }
+
+         .weather-img {
+            width: 80px; /* Задаем ширину 80 пикселей */
+            height: 80px;
+            display: block;
+            margin: 0 auto;
+            margin-left: -15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 md-3 bg-white border-button shadow-sm" style="color: #959733;">
+        <h5 class="my-0 mr-md-auto font-weight-normal">IT-Academy</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a href="{% url 'home' %}" class="p-2 text-dark">Главная страница</a>
+            <a href="@" class="p-2 text-dark">Информация</a>
+        </nav>
+        <a href="{% url 'Documentation' %}" class="btn btn-outline-primary">Документации</a>
+    </div>
+</div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-5 offset-1">
+                <h1 style="color: #959733;">Погода в вашем городе</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <label for="city" style="color: #959733;">Город</label>
+                    {{ form.name }}
+                    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+                </form>
+            </div>
+            <div class="col-4 offset-1">
+                <h1 style="color: #959733;">Информация</h1>
+                {% for info in all_info %}
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-9">
+                            <b>Город:</b> {{ info.city }}<br>
+                            <b>Температура:</b> {{ info.temp }}<sup>0</sup><br>
+                            <b>Влажность:</b> {{ info.humidity }}<sup>%</sup><br>
+                            <b>Скорость ветра:</b> {{ info.visibility }}<sup>%</sup><br>
+                        </div>
+                        <div class="col-2">
+                            <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Фото погоды" class=" weather-img">
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
