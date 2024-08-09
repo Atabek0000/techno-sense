@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжный магазин</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Книжный магазин</h1>
+
+    <h2>Добавить новую книгу</h2>
+    <form action="{{ url_for('add_book') }}" method="post">
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="author">Автор:</label>
+        <input type="text" id="author" name="author" required><br>
+        <label for="price">Цена:</label>
+        <input type="number" id="price" name="price" step="0.01" required><br>
+        <label for="stock">Запас:</label>
+        <input type="number" id="stock" name="stock" required><br>
+        <label class="for" for="image_url">Image URL:</label>
+        <input type="url" id="image_url" name="image_url" required><br>
+        <input type="submit" value="Add Book">
+    </form>
+
+    <h2>Книги в складе</h2>
+    <ul>
+        {% for book in books %}
+            <li>Заголовок: {{ book.title }}, Автор: {{ book.author }}, Цена: ${{ book.price }}, Запас: {{ book.stock }}</li>
+        {% endfor %}
+        <button><a href="{{ url_for('about') }}">Входить</a></button>
+    </ul>
+</body>
+</html>

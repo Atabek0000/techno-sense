@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1c566;
+    color: #333;
+}
+
+/* Стилизация навигационной панели */
+.navbar {
+    background-color: #494747;
+    padding: 10px;
+    text-align: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.nav-link {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-link:hover {
+    color: #ddd;
+}
+
+.nav-link.active {
+    color: #ffd700;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.book-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.book-item h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.book-item p {
+    margin: 5px 0;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a;
+}
