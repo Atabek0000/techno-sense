@@ -1,0 +1,125 @@
+/* Общие стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1c566;
+    color: #333;
+}
+
+/* Стилизация навигационной панели */
+.navbar {
+    background-color: #494747;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav-link {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #62cf50;
+    font-weight: bold;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+/* Стили для заголовка страницы */
+h1 {
+    text-align: center;
+    color: #62cf50;
+    margin: 20px 0;
+}
+
+.btn {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.book-item {
+    background-color: #f9db99;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px; /* фиксированная ширина */
+    height: auto; /* высота определяется содержимым */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.book-image {
+    width: 100%;
+    height: 150px; /* фиксированная высота изображения */
+    margin-bottom: 15px;
+}
+
+.book-image img {
+    width: 100%;
+    height: 105%;
+    object-fit: cover; /* обеспечивает правильное обрезание изображений */
+    border-radius: 4px;
+}
+
+.book-info {
+    margin-bottom: 20px;
+}
+
+.book-info h3 {
+    margin: 0;
+    color: #007bff;
+}
+
+.book-info p {
+    margin: 5px 0;
+}
+
+/* Стилизация кнопок */
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a;
+}
+
+.buy-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.buy-btn:hover {
+    background-color: #00b907;
+}
+
+.buy-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
