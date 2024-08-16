@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О странице</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body class="bg-gray-100">
+
+<header>
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex items-center">
+            <div class="flex items-center">
+                <img src="{{ url_for('static', filename='image/sss.png') }}" alt="Логотип" class="h-16 mr-4 rounded-full">
+                <h1 class="text-white text-xl">О нашем книжном складе</h1>
+            </div>
+
+            <!-- Навигационные ссылки справа -->
+            <div class="ml-auto flex items-center space-x-4">
+                <a href="{{ url_for('index') }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Вернуться назад</a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('account') }}" class="text-white hover:underline">Account</a>
+                    <a href="{{ url_for('logout') }}" class="text-white hover:underline">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="container mx-auto mt-4">
+            <div class="bg-blue-500 text-white p-4 rounded">
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endwith %}
+
+<main class="container mx-auto mt-4">
+    {% block content %}{% endblock %}
+    <h2 class="text-2xl font-bold mb-4">Доступные книги</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {% for book in books %}
+        <div class="bg-white p-4 rounded shadow">
+            {% if book.image_url %}
+                <img src="{{ book.image_url }}" alt="Обложка книги" class="w-full h-64 object-cover mb-4 rounded">
+            {% endif %}
+            <h3 class="text-xl font-semibold">{{ book.title }}:</h3>
+            <p><strong>Автор:</strong> {{ book.author }}</p>
+            <p><strong>Цена:</strong> ${{ book.price }}</p>
+            <p><strong>Запас:</strong> {{ book.stock }} доступны копии</p>
+            <div class="mt-4">
+                <form action="{{ url_for('checkout') }}" method="post" class="inline">
+                    <input type="hidden" name="title" value="{{ book.title }}">
+                    <input type="hidden" name="price" value="{{ book.price }}">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition" {% if book.stock == 0 %}disabled{% endif %}>Купить</button>
+                </form>
+                <form action="{{ url_for('delete_book') }}" method="post" class="inline" onsubmit="return confirm('Вы уверены, что хотите удалить эту книгу?');">
+                    <input type="hidden" name="title" value="{{ book.title }}">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Удалить</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/about.js') }}"></script>
+</body>
+</html>

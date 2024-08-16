@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Регистрация и Вход</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form method="POST" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+        <h1>Зарегистрироваться</h1>
+        <div class="social-container">
+          <a href="https://www.facebook.com/v2.12/dialog/oauth?client_id=YOUR_FB_APP_ID&redirect_uri=YOUR_REDIRECT_URI" class="social" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://accounts.google.com/o/oauth2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email" class="social" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-plus-g"></i></a>
+          <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=YOUR_LINKEDIN_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI" class="social" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>или используйте свой адрес электронной почты для регистрации</span>
+        <input type="text" name="username" placeholder="Имя" value="{{ form.username.data or '' }}" />
+        {% for error in form.username.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        <input type="email" name="email" placeholder="Электронная почта" value="{{ form.email.data or '' }}" />
+        {% for error in form.email.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        <input type="password" name="password" placeholder="Пароль" />
+        {% for error in form.password.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        <input type="password" name="confirm_password" placeholder="Подтвердите пароль" />
+        {% for error in form.confirm_password.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        <button type="submit">Зарегистрироваться</button>
+      </form>
+    </div>
+
+    <!-- Форма входа -->
+    <div class="form-container sign-in-container">
+      <form method="POST" action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
+        <h1>Войти</h1>
+        <div class="social-container">
+          <a href="https://www.facebook.com/v2.12/dialog/oauth?client_id=YOUR_FB_APP_ID&redirect_uri=YOUR_REDIRECT_URI" class="social" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://accounts.google.com/o/oauth2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email" class="social" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-plus-g"></i></a>
+          <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=YOUR_LINKEDIN_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI" class="social" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>или используйте свой аккаунт</span>
+        <input type="email" name="email" placeholder="Электронная почта" value="{{ form.email.data or '' }}" />
+        {% for error in form.email.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        <input type="password" name="password" placeholder="Пароль" />
+        {% for error in form.password.errors %}
+          <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        <button type="submit">Войти</button>
+      </form>
+    </div>
+
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Добро пожаловать!</h1>
+          <p>Чтобы оставаться на связи с нами, пожалуйста, войдите в систему, указав свои персональные данные.</p>
+          <button class="ghost" id="signIn">Войти</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Привет, друг!</h1>
+          <p>Введите ваши персональные данные и начните путешествие с нами</p>
+          <button class="ghost" id="signUp">Зарегистрироваться</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+</body>
+</html>
